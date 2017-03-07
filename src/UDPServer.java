@@ -5,9 +5,11 @@ import java.util.*;
 
 public class UDPServer {
     private int port;
+
     public UDPServer(int port){
         this.port = port;
     }
+
     public void startUDPServer(){
         try
         {
@@ -18,10 +20,14 @@ public class UDPServer {
             while ( run )
             {
                 byte data[] = new byte[1024];
+
                 // Wait for request
                 packet = new DatagramPacket(data, data.length);
                 socket.receive(packet);
-                System.out.println(new String(packet.getData()));
+                Frigo.amount = new String(packet.getData());
+                Frigo.amountList.add(new String(packet.getData()));
+                System.out.println(Frigo.amount);
+
                 // Decode sender, ignore all other content
                 InetAddress address = packet.getAddress();
                 int port = packet.getPort();
@@ -36,4 +42,5 @@ public class UDPServer {
             System.out.println(e);
         }
     }
+
 }
