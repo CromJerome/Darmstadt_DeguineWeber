@@ -9,15 +9,15 @@ import java.net.URL;
 /**
  * Created by jerome on 07/03/2017.
  */
-public class XmlTpcClient {
+public class XmlRpcClient {
     private org.apache.xmlrpc.client.XmlRpcClient client;
     private int port;
-    public XmlTpcClient(int port){
+    public XmlRpcClient(int port){
         this.port = port;
     }
 
-    public void startXmlTpcClient(){
-        System.out.println("Start XmlTpcClient");
+    public void startXmlRpcClient(){
+        System.out.println("Start XmlRpcClient");
         try{
             XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
 
