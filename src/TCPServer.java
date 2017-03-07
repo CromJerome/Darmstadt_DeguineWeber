@@ -72,10 +72,12 @@ public class TCPServer {
     response += "\r\n";
     response += "<p> Hello world </p> \r\n";
 
+    response += "<p>";
     for (String val : Frigo.amountList) {
-      response += "<p>" + val +"</p> \r\n";
+      response += val + "  ";
     }
+    response += "</p>\r\n";
 
-    toClient.writeBytes(response);  // Send answer
+            toClient.writeBytes(response);  // Send answer
   }
 }
