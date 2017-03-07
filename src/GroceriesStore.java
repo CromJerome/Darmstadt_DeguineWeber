@@ -33,7 +33,8 @@ public class GroceriesStore {
         return new Integer(x+y);
     }
 
-    public Integer buy(int amount, String productname) {
+    public Integer buy(String productname,int amount) {
+        System.out.println("The shop try to sell "+ amount +" of "+ productname);
         //Let the fridge buy from the store
         int productindex = getProductByName(productname);
         if(productindex >= 0){
@@ -45,6 +46,7 @@ public class GroceriesStore {
     }
 
     public void startGroceriesStoreServer(){
+        generateProducts();
         try {
 
             WebServer webServer = new WebServer(port);
@@ -52,7 +54,7 @@ public class GroceriesStore {
             XmlRpcServer xmlRpcServer = webServer.getXmlRpcServer();
             PropertyHandlerMapping phm = new PropertyHandlerMapping();
 
-            phm.addHandler( "GroceriesStore", CalcServer.class);
+            phm.addHandler( "GroceriesStore", GroceriesStore.class);
             xmlRpcServer.setHandlerMapping(phm);
 
             XmlRpcServerConfigImpl serverConfig =

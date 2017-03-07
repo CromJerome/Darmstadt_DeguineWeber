@@ -17,7 +17,7 @@ public class UDPClient {
     public void startUDPClient() throws IOException{
         sensor = new Sensor(50, "L");
         DatagramSocket socket = new DatagramSocket();
-        while(sensor.getAmount() > 0){
+        while(sensor.getAmount() >= 0){
             sensor.decreaseAmountByRandom();
             byte msg[] = new byte[1024];
 
@@ -33,9 +33,16 @@ public class UDPClient {
             socket.receive(packet);
             System.out.println(new String( packet.getData()));
             try{
-                TimeUnit.SECONDS.sleep(3);
+                TimeUnit.SECONDS.sleep(1);
             }catch (InterruptedException e){
 
+            }
+            if(sensor.getAmount() == 0){
+                try{
+                    Frigo.buyStuff("Milk",10);
+                }catch (Exception e){
+
+                }
             }
         }
         socket.close();
