@@ -24,10 +24,16 @@ public class UDPServer {
                 // Wait for request
                 packet = new DatagramPacket(data, data.length);
                 socket.receive(packet);
-                Frigo.amount = new String(packet.getData());
                 Frigo.amountList.add(new String(packet.getData()));
                 System.out.println(Frigo.amount);
+                if(Integer.parseInt(Frigo.amount)  <= 0){
+                    try{
+                        Frigo.buyStuff("Milk",10);
 
+                    }catch (Exception e){
+
+                    }
+                }
                 // Decode sender, ignore all other content
                 InetAddress address = packet.getAddress();
                 int port = packet.getPort();

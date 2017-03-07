@@ -26,4 +26,7 @@ public class Sensor {
     public int getAmount(){
         return this.amount;
     }
+
+
+
 }

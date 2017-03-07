@@ -22,10 +22,13 @@ public class GroceriesStore {
     private boolean checkProductStock( int productindex, int amount){
         return products.get(productindex).getStock() - amount > 0;
     }
+    public GroceriesStore(){
+        this.products = new ArrayList<Product>();
+    }
 
     public GroceriesStore(int port) {
         this.port = port;
-        this.products = new ArrayList<>();
+        this.products = new ArrayList<Product>();
     }
 
     public Integer add(int x, int y) {

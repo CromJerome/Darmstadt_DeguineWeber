@@ -23,7 +23,7 @@ public class UDPClient {
 
             // Construct and send Request
             InetAddress address = InetAddress.getByName(host);
-            String amount = Integer.toString(sensor.getAmount()) +" "+ sensor.getMeasureunit();
+            String amount = Integer.toString(sensor.getAmount())/* +" "+ sensor.getMeasureunit()*/;
             msg = amount.getBytes();
             DatagramPacket packet = new DatagramPacket(msg, msg.length, address, port);
             socket.send(packet);
@@ -36,13 +36,6 @@ public class UDPClient {
                 TimeUnit.SECONDS.sleep(1);
             }catch (InterruptedException e){
 
-            }
-            if(sensor.getAmount() == 0){
-                try{
-                    Frigo.buyStuff("Milk",10);
-                }catch (Exception e){
-
-                }
             }
         }
         socket.close();

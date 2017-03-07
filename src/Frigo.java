@@ -39,5 +39,5 @@ public class Frigo extends Thread{
         client.startXmlRpcClient();
         System.out.println("The fridge try to buy"+ amount + " of "+ productname);
         client.buyStuff(productname,amount);
-    }
+}
 }
