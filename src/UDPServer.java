@@ -28,7 +28,9 @@ public class UDPServer {
                 Frigo.amountList.add(new String(packet.getData()));
                 System.out.println(Frigo.amount);
                 if(Frigo.amount !=  "Please refresh"){
-                    if(Integer.parseInt(Frigo.amount)  <= 0) {
+                    System.out.println("Check");
+                    int amount = Integer.parseInt(Frigo.amount.trim());
+                    if( amount <= 0) {
                         try {
                             Frigo.buyStuff("Milk", 10);
                         } catch (Exception e) {
