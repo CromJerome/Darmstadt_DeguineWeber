@@ -38,13 +38,13 @@ public class GroceriesStore {
 
     public Integer buy(String productname,int amount) {
         System.out.println("The shop try to sell "+ amount +" of "+ productname);
-        //Let the fridge buy from the store
+        /*//Let the fridge buy from the store
         int productindex = getProductByName(productname);
         if(productindex >= 0){
             if(checkProductStock(products.get(productindex).getStock(),amount))
             products.get(productindex).decreaseStock(amount);
-            return new Integer(products.get(productindex).getCost() * amount);
-        }
+            return new Integer(amount);
+        }*/
         return new Integer(amount);
     }
 

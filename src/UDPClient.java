@@ -32,7 +32,8 @@ public class UDPClient {
             packet = new DatagramPacket(msg, msg.length);
             socket.receive(packet);
             System.out.println(new String( packet.getData()));
-            sensor.setAmount(Integer.parseInt(new String(packet.getData()).replaceAll("[^\\d.]", "")));
+            sensor.setAmount(Integer.parseInt(new String(packet.getData())));
+            System.out.println(sensor.getAmount());
             try{
                 TimeUnit.SECONDS.sleep(1);
             }catch (InterruptedException e){
