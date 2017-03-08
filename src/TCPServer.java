@@ -13,7 +13,7 @@ import sun.misc.IOUtils;
 import java.io.*;
 import java.net.*;
 
-public class TCPServer {
+public class TCPServer extends Thread{
 
   private String line;
   private BufferedReader fromClient;
@@ -29,15 +29,21 @@ public class TCPServer {
             + port );
   }
 
-  public void startTCPServer() throws IOException{
-    while (true) {                            // Handle connection request
+  @Override
+  public void run() {
+    try{
+      while (true) {                            // Handle connection request
         Socket client = contactSocket.accept(); // creat communication socket
         System.out.println("Connection with: "+client.getRemoteSocketAddress());
 //      if (client.getInetAddress().toString().equals("/0:0:0:0:0:0:0:1")){
 //          UDPClient udpClient = new UDPClient("localhost",1313);
 //          udpClient.startUDPClient();
 //      }
-      handleRequests(client);
+        handleRequests(client);
+      }
+    }
+    catch (IOException e){
+
     }
   }
 

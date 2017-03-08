@@ -8,61 +8,42 @@ import java.util.ArrayList;
 public class Frigo extends Thread{
     public static int amount = -1;
     public static int tempAmount = -1;
+
     public static ArrayList<Integer> amountList = new ArrayList<Integer>();
     private static XmlRpcClient client;
     public static void main(String args[]) {
         try {
-            Thread tcpServer = new Thread() {
-                public void run() {
-                    try {
-                        TCPServer tcpServer = new TCPServer(9999);
-                        tcpServer.startTCPServer();
-                        System.out.println("Amount : "+ amount);
-                    } catch (Exception e) {
-                        System.out.println(e);
-                    }
-                }
-            };
-            Thread udpServer = new Thread() {
-                public void run() {
-                    try {
-                        UDPServer udpServer = new UDPServer(1313);
-                        udpServer.startUDPServer();
-                        System.out.println("Amount : "+ amount);
-                    } catch (Exception e) {
-                        System.out.println(e);
-                    }
-                }
-            };
-            Thread checkLoop = new Thread(){
-                public void run(){
-                    System.out.println("Check stock thread started ...");
-                    while (true){
-                        System.out.print("");
-                        if(Frigo.amount !=  -1){
-                            System.out.print("");
-                            int amount = Frigo.amount;
-                            if( amount <= 10) {
-                                try {
-                                    buyStuff("Milk", 10);
-                                } catch (Exception e) {
+            TCPServer tcpServer = new TCPServer(9999);
+            tcpServer.start();
 
-                                }
-                            }
+            UDPServer udpServer = new UDPServer(1313);
+            udpServer.start();
+
+            System.out.println("Amount : "+ amount);
+            System.out.println("Check stock thread started ...");
+
+            while (true){
+                System.out.print("");
+                if(Frigo.amount !=  -1){
+                    System.out.print("");
+                    int amount = Frigo.amount;
+                    if( amount <= 10) {
+                        try {
+                            buyStuff("Milk", 10);
+                        } catch (Exception e) {
+
                         }
                     }
                 }
-            };
-            checkLoop.start();
-            tcpServer.start();
-            udpServer.start();
-        } catch (Exception e) {
 
+            }
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
     public static void buyStuff(String productname, int amount) throws Exception{
 
-        System.out.println("Start XmlRpcClient");
+        //System.out.println("Start XmlRpcClient");
         try{
             XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
 
@@ -71,12 +52,13 @@ public class Frigo extends Thread{
             client.setConfig(config);
 
             Object[] params = new Object[]{new String(productname), new Integer(amount)};
-            System.out.println("About to get results...(params[0] = " + params[0]
-                    + ", params[1] = " + params[1] + ")." );
+           // System.out.println("Try to buy " + params[1] + " " + params[0]);
 
             Integer result = (Integer) client.execute("GroceriesStore.buy", params);
-            System.out.println("Buys = " + result );
-            Frigo.tempAmount = Frigo.amount += result;
+           // System.out.println("Buys = " + result );
+           // System.out.println(Frigo.amount + result);
+            Frigo.tempAmount = Frigo.amount + result;
+            //System.out.println(Frigo.tempAmount);
         }catch(XmlRpcException e){
 
         }

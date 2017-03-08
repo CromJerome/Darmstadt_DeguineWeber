@@ -37,7 +37,7 @@ public class GroceriesStore {
     }
 
     public Integer buy(String productname,int amount) {
-        System.out.println("The shop try to sell "+ amount +" of "+ productname);
+       // System.out.println("The shop try to sell "+ amount +" of "+ productname);
         /*//Let the fridge buy from the store
         int productindex = getProductByName(productname);
         if(productindex >= 0){
