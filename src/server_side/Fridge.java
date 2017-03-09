@@ -24,7 +24,7 @@ public class Fridge {
     static String line;
     public static String amount = "Initialize... Please Wait";
     public static int tmpAmount = -1;
-    public static ArrayList<String> amountList;
+    public static ArrayList<String> amountList = new ArrayList<String>();
     static BufferedReader fromClient;
     static DataOutputStream toClient;
     
@@ -37,11 +37,22 @@ public class Fridge {
         UDPServer udpServer = new UDPServer();
                    udpServer.start();
 
+<<<<<<< HEAD
         TimeUnit.SECONDS.sleep(15);
         while(true) {
                 if(Integer.parseInt(amount.replaceAll("[^\\d.]", "")) < 10) {
                     buyStuff(50);
                 }
+=======
+
+        while(true) {
+            Thread.sleep(200);
+            if(!amount.equals("Initialize... Please Wait")){
+                if(Integer.parseInt(amount.replaceAll("[^\\d.]", "")) < 10) {
+                    buyStuff(5);
+                }
+            }
+>>>>>>> Guillaume
         }
     }
 

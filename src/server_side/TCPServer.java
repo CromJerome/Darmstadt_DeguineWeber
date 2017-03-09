@@ -61,11 +61,14 @@ public class TCPServer extends Thread {
         response = "HTTP/1.1 200 OK \r\n";
         response += "Content-Type: text/html \r\n";
         response += "\r\n";
-        response += "<p> Hello world </p> \r\n";
+        response += "<p> Fridge : </p> \r\n";
 
+        response += "<p>";
         for (String val : Fridge.amountList) {
-            response += "<p>" + val +"</p> \r\n";
+            response += val;
         }
+        response += "</p>\r\n";
+
         toClient.writeBytes(response);  // Send answer
     }
   
