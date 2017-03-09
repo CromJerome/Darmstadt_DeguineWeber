@@ -56,13 +56,15 @@ public class Fridge {
         Object[] params = new Object[]{new Integer(quantity)};
         Integer result = (Integer) client.execute("GroceriesStore.buyStuff", params);
         System.out.println("Result of the xmlRPC = " + result );
-        tmpAmount = Integer.parseInt(amount.replaceAll("[^\\d.]", ""));
+        if(result != 0){
+            tmpAmount = Integer.parseInt(amount.replaceAll("[^\\d.]", ""));
 
-        tmpAmount += result;
-        amount = Integer.toString(tmpAmount);
+            tmpAmount += result;
+            amount = Integer.toString(tmpAmount);
 
-        System.out.println("You just buy stuff, you have now:"+amount);
-        if(result == 0)
+            System.out.println("You just buy stuff, you have now:"+amount);
+        }
+        else if(result == 0)
         {
             System.out.println("The store is empty");
         }

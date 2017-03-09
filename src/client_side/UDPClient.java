@@ -46,14 +46,18 @@ public class UDPClient {
 
             //Reset the array
             msg= new byte[256];
+            try{
+                socket.setSoTimeout(2000);
+                socket.receive(packet);
+                System.out.println("Data obtained from  " + host
+                        + " Port " + port + " = " );
+                String receiveNumber = new String(packet.getData());
+                System.out.print(receiveNumber);
 
-            socket.receive(packet);
-            System.out.println("Data obtained from  " + host
-                    + " Port " + port + " = " );
-            String receiveNumber = new String(packet.getData());
-            System.out.print(receiveNumber);
-
-            s.setAmount(Integer.parseInt(receiveNumber.replaceAll("[^\\d.]", "")));
+                s.setAmount(Integer.parseInt(receiveNumber.replaceAll("[^\\d.]", "")));
+            }catch (SocketTimeoutException e){
+                System.out.println("Nothing receive from server " + e);
+            }
             s.decreaseAmountByRandom();
         }
         //socket.close();

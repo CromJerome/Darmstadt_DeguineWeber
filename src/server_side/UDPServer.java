@@ -51,22 +51,17 @@ public class UDPServer extends Thread {
             String s = "";
             // Encode answer
             if(Fridge.tmpAmount != -1) {
-                s =  Integer.toString(Fridge.tmpAmount);
+                s = Integer.toString(Fridge.tmpAmount);
                 Fridge.tmpAmount = -1;
+                data = s.getBytes();
+                // Send ansswer
+                packet = new DatagramPacket(data,data.length,address,port);
+                try {
+                    socket.send(packet);
+                } catch (IOException ex) {
+                    Logger.getLogger(UDPServer.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-            else
-            {
-                s = Fridge.amount;
-            }
-
-            data = s.getBytes();
-            // Send ansswer
-            packet = new DatagramPacket(data,data.length,address,port);
-           try {
-               socket.send(packet);
-           } catch (IOException ex) {
-               Logger.getLogger(UDPServer.class.getName()).log(Level.SEVERE, null, ex);
-           }
         }
     }
 }
