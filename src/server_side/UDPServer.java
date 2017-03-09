@@ -11,6 +11,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.io.*;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,9 +49,14 @@ public class UDPServer extends Thread {
             Fridge.amountList.add(this.response);
 
 
-           InetAddress address = packet.getAddress();
+            InetAddress address = packet.getAddress();
             int port   = packet.getPort();
             String s = "";
+            try{
+                TimeUnit.SECONDS.sleep(2);
+            }catch (InterruptedException e){
+                Logger.getLogger(UDPServer.class.getName()).log(Level.SEVERE, null, e);
+            }
 
             // Encode answer
             if(Fridge.tmpAmount != -1) {
@@ -61,8 +67,8 @@ public class UDPServer extends Thread {
                 packet = new DatagramPacket(data,data.length,address,port);
                 try {
                     socket.send(packet);
-                } catch (IOException ex) {
-                    Logger.getLogger(UDPServer.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException e) {
+                    Logger.getLogger(UDPServer.class.getName()).log(Level.SEVERE, null, e);
                 }
             }
         }

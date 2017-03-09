@@ -5,8 +5,5 @@ package client_side;
  */
 public class TestMultiplePaho {
     public static void main(String[] args) {
-        new PahoDemo().doDemo("Patate");
-        new PahoDemo().doDemo("Jambon");
-        new PahoDemo().doDemo("Pomme de terre");
     }
 }

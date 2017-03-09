@@ -57,7 +57,6 @@ public class UDPClient {
                 System.out.println("Data obtained from  " + host
                         + " Port " + port + " = " + receiveNumber );
 
-
                 s.setAmount(Integer.parseInt(receiveNumber.replaceAll("[^\\d.]", "")));
 
             }catch (SocketTimeoutException e){
