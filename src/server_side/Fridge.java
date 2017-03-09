@@ -52,7 +52,6 @@ public class Fridge {
                     buyStuff(5);
                 }
             }
-
         }
     }
 
