@@ -25,6 +25,9 @@ public class UDPClient {
         Product milk = new Product("Milk", 2, "L");
         Sensor s = new Sensor(milk,11);
 
+        Sensor s2 = new Sensor("orangeJuice;L;3;14");
+
+
         // Construct and send Request
         DatagramSocket socket = new DatagramSocket();
 
@@ -37,6 +40,7 @@ public class UDPClient {
             byte msg[] = new byte[256];
 
             str_amount = Integer.toString(s.getAmount()) + "\n";
+
             msg = str_amount.getBytes();
 
             System.out.println("Sending amount : " + str_amount);

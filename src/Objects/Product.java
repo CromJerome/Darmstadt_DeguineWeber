@@ -17,6 +17,17 @@ public class Product {
         this.measureunit = measureunit;
     }
 
+    public Product(String product) {
+        String[] parts = product.split(";");
+        this.name = parts[0];
+        this.measureunit = parts[1];
+        this.cost = Integer.parseInt(parts[2].replaceAll("[^\\d.]", ""));
+    }
+
+    @Override
+    public String toString(){
+        return this.name + ";" + this.measureunit + ";" + this.cost;
+    }
 
     public String getName() {
         return name;

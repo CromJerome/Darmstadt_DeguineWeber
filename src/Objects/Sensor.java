@@ -15,6 +15,17 @@ public class Sensor {
         this.amount = amount;
     }
 
+    public Sensor(String sensor){
+        String[] parts = sensor.split(";");
+        this.product = new Product(parts[0]+";"+parts[1]+";"+parts[2]);
+        this.amount = Integer.parseInt(parts[3].replaceAll("[^\\d.]", ""));
+    }
+
+    @Override
+    public String toString(){
+        return this.product.toString()+";"+this.amount;
+    }
+
     public void setAmount(int amount) {
         this.amount = amount;
     }
