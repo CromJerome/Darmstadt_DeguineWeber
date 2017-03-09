@@ -8,14 +8,15 @@ import java.util.Random;
 public class Product {
     private String name;
     private int cost;
-    private int stock;
+    private String measureunit;
 
 
-    public Product(String name, int cost, int stock) {
+    public Product(String name, int cost, String measureunit) {
         this.name = name;
         this.cost = cost;
-        this.stock = stock;
+        this.measureunit = measureunit;
     }
+
 
     public String getName() {
         return name;
@@ -33,20 +34,15 @@ public class Product {
         this.cost = cost;
     }
 
-    public int getStock() {
-        return stock;
+
+    public String getMeasureunit() {
+        return measureunit;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setMeasureunit(String measureunit) {
+        this.measureunit = measureunit;
     }
 
-    public void decreaseStock(int amount){
-        this.stock = stock - amount;
-    }
 
-    public void decreaseStockByRandom(){
-        Random r = new Random();
-        this.stock = this.stock - (r.nextInt(this.stock/2) +2);
-    }
+
 }

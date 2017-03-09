@@ -45,10 +45,13 @@ public class UDPServer extends Thread {
             // Decode sender, ignore all other content
             System.out.print( this.response );
             Fridge.amount = this.response;
+            Fridge.amountList.add(this.response);
 
-            InetAddress address = packet.getAddress();
+
+           InetAddress address = packet.getAddress();
             int port   = packet.getPort();
             String s = "";
+
             // Encode answer
             if(Fridge.tmpAmount != -1) {
                 s = Integer.toString(Fridge.tmpAmount);
