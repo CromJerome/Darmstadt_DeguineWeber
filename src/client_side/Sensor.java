@@ -1,3 +1,5 @@
+package client_side;
+
 import java.util.Random;
 import java.util.StringJoiner;
 
@@ -6,6 +8,11 @@ import java.util.StringJoiner;
  */
 public class Sensor {
     private int amount;
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
     private String measureunit;
 
     public Sensor(int amount, String measureunit){
@@ -26,4 +33,7 @@ public class Sensor {
     public int getAmount(){
         return this.amount;
     }
+
+
+
 }
