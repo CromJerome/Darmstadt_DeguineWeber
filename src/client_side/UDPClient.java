@@ -5,6 +5,7 @@ import Objects.Sensor;
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class UDPClient {
@@ -24,9 +25,11 @@ public class UDPClient {
 
         Product milk = new Product("Milk", 2, "L");
         Sensor s = new Sensor(milk,11);
-
         Sensor s2 = new Sensor("orangeJuice;L;3;14");
 
+        ArrayList<Sensor> sensorArray = new ArrayList<Sensor>();
+        sensorArray.add(s);
+        sensorArray.add(s2);
 
         // Construct and send Request
         DatagramSocket socket = new DatagramSocket();
@@ -34,16 +37,22 @@ public class UDPClient {
         InetAddress address = InetAddress.getByName(host);
 
         //numberOfProduct = 11;
-        String str_amount;
+        String str_sensors = "";
+
         while(true)
         {
             byte msg[] = new byte[256];
 
-            str_amount = Integer.toString(s.getAmount()) + "\n";
+            for (Sensor sensor : sensorArray) {
+                str_sensors += sensor.toString()+ "|";
+            }
+            str_sensors = str_sensors.substring(0,str_sensors.length() -1);
 
-            msg = str_amount.getBytes();
+            //str_sensors = Integer.toString(s.getAmount()) + "\n";
 
-            System.out.println("Sending amount : " + str_amount);
+            msg = str_sensors.getBytes();
+
+            System.out.println("Sending data : " + str_sensors);
             TimeUnit.SECONDS.sleep(2);
 
             DatagramPacket packet = new DatagramPacket(msg, msg.length,
@@ -56,7 +65,17 @@ public class UDPClient {
             try{
                 socket.setSoTimeout(4000);
                 socket.receive(packet);
-                String receiveNumber = new String(packet.getData());
+                String strSensors = new String(packet.getData());
+
+                String[] parts = strSensors.split("|");
+                for (Sensor sensor : sensorArray) {
+                    for (String srv : parts){
+                        Sensor tmp = new Sensor(srv);
+                        if(tmp.getProduct().getName() == sensor.getProduct().getName()){
+                            
+                        }
+                    }
+                }
 
                 System.out.println("Data obtained from  " + host
                         + " Port " + port + " = " + receiveNumber );
@@ -67,7 +86,10 @@ public class UDPClient {
                 System.out.println("Nothing receive from server " + e);
             }
 
-            s.decreaseAmountByRandom();
+            for (Sensor sensor : sensorArray) {
+                sensor.decreaseAmountByRandom();
+            }
+
 
         }
         //socket.close();

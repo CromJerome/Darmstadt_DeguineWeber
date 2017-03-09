@@ -5,6 +5,8 @@
  */
 package server_side;
 
+import Objects.Sensor;
+
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -44,9 +46,16 @@ public class UDPServer extends Thread {
                Logger.getLogger(UDPServer.class.getName()).log(Level.SEVERE, null, ex);
            }
             // Decode sender, ignore all other content
+
             System.out.print( this.response );
-            Fridge.amount = this.response;
-            Fridge.amountList.add(this.response);
+
+           String[] parts = this.response.split("|");
+           for (String part : parts) {
+               Fridge.sensorList.add(new Sensor(part));
+           }
+
+
+           //Fridge.amountList.add(this.response);
 
 
             InetAddress address = packet.getAddress();
@@ -59,7 +68,24 @@ public class UDPServer extends Thread {
             }
 
             // Encode answer
-            if(Fridge.tmpAmount != -1) {
+           if(Fridge.tmpSensorList.size() > 0){
+                String resp = "";
+               for (Sensor sensor : Fridge.tmpSensorList) {
+                   resp += sensor.toString()+"|";
+               }
+               resp = resp.substring(0,resp.length() -1);
+               data = resp.getBytes();
+               // Send ansswer
+               packet = new DatagramPacket(data,data.length,address,port);
+               try {
+                   socket.send(packet);
+               } catch (IOException e) {
+                   Logger.getLogger(UDPServer.class.getName()).log(Level.SEVERE, null, e);
+               }
+           }
+
+           /* if(Fridge.tmpAmount != -1) {
+
                 s = Integer.toString(Fridge.tmpAmount);
                 Fridge.tmpAmount = -1;
                 data = s.getBytes();
@@ -70,7 +96,7 @@ public class UDPServer extends Thread {
                 } catch (IOException e) {
                     Logger.getLogger(UDPServer.class.getName()).log(Level.SEVERE, null, e);
                 }
-            }
+            }*/
         }
     }
 }

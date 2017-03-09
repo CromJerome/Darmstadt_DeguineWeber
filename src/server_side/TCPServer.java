@@ -64,9 +64,9 @@ public class TCPServer extends Thread {
         response += "<p> Fridge : </p> \r\n";
 
         response += "<p>";
-        for (String val : Fridge.amountList) {
+/*        for (String val : Fridge.amountList) {
             response += val;
-        }
+        }*/
         response += "</p>\r\n";
 
         toClient.writeBytes(response);  // Send answer

@@ -7,6 +7,14 @@ import java.util.StringJoiner;
  * Created by jerome on 06/03/2017.
  */
 public class Sensor {
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     private Product product;
     private int amount;
 
@@ -28,6 +36,10 @@ public class Sensor {
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public void addAmount(int amount) {
+        this.amount += amount;
     }
 
     public void decreaseAmountByRandom(){
