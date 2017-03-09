@@ -42,7 +42,6 @@ public class GroceryServer {
                     (XmlRpcServerConfigImpl) xmlRpcServer.getConfig();
             // serverConfig.setEnabledForExtensions(true);
             // serverConfig.setContentLengthOptional(false);
-
             webServer.start();
 
             System.out.println("The GroceriesStore Server has been started..." );

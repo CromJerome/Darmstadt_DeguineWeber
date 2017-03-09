@@ -47,7 +47,7 @@ public class UDPClient {
             //Reset the array
             msg= new byte[256];
             try{
-                socket.setSoTimeout(2000);
+                socket.setSoTimeout(4000);
                 socket.receive(packet);
                 System.out.println("Data obtained from  " + host
                         + " Port " + port + " = " );

@@ -37,13 +37,12 @@ public class Fridge {
         UDPServer udpServer = new UDPServer();
                    udpServer.start();
 
-        TimeUnit.SECONDS.sleep(10);
+        TimeUnit.SECONDS.sleep(15);
         while(true) {
-            if(Integer.parseInt(amount.replaceAll("[^\\d.]", "")) < 10) {
-                buyStuff(50);
-            }
+                if(Integer.parseInt(amount.replaceAll("[^\\d.]", "")) < 10) {
+                    buyStuff(50);
+                }
         }
-
     }
 
     public static void buyStuff(int quantity) throws MalformedURLException, XmlRpcException {
