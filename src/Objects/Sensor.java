@@ -40,11 +40,10 @@ public class Sensor {
     public String getMeasureunit(){
         return this.product.getMeasureunit();
     }
-
+    public Product getProduct(){
+        return this.product;
+    }
     public int getAmount(){
         return this.amount;
     }
-
-
-
 }

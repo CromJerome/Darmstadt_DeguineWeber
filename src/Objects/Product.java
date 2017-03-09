@@ -45,7 +45,6 @@ public class Product {
         this.cost = cost;
     }
 
-
     public String getMeasureunit() {
         return measureunit;
     }
@@ -54,6 +53,10 @@ public class Product {
         this.measureunit = measureunit;
     }
 
+    public void decreaseCostByRandom(int max){
+        Random r = new Random();
+        this.cost = r.nextInt(max);
+    }
 
 
 }
