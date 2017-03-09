@@ -1,8 +1,9 @@
 package client_side;
 
+import Objects.Sensor;
+
 import java.io.*;
 import java.net.*;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class UDPClient {

@@ -1,4 +1,4 @@
-package client_side;
+package Objects;
 
 import java.util.Random;
 import java.util.StringJoiner;
