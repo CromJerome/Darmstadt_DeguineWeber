@@ -37,13 +37,13 @@ public class Fridge {
         UDPServer udpServer = new UDPServer();
                    udpServer.start();
 
-<<<<<<< HEAD
+/*<<<<<<< HEAD
         TimeUnit.SECONDS.sleep(15);
         while(true) {
                 if(Integer.parseInt(amount.replaceAll("[^\\d.]", "")) < 10) {
                     buyStuff(50);
                 }
-=======
+=======*/
 
         while(true) {
             Thread.sleep(200);
@@ -52,7 +52,7 @@ public class Fridge {
                     buyStuff(5);
                 }
             }
->>>>>>> Guillaume
+
         }
     }
 
