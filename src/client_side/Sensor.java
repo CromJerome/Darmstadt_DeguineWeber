@@ -1,3 +1,5 @@
+package client_side;
+
 import java.util.Random;
 import java.util.StringJoiner;
 
